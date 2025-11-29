@@ -1,25 +1,38 @@
-[gd_scene load_steps=3 format=3 uid="uid://87v447eylvj8"]
+[gd_scene load_steps=7 format=3 uid="uid://87v447eylvj8"]
 
 [ext_resource type="Script" uid="uid://d1owt6401twbr" path="res://assets/ui/screens/main_menu/MainMenu.cs" id="1_dxmgs"]
+[ext_resource type="Texture2D" uid="uid://b6w5wcyn20d20" path="res://assets/ui/components/button/button.png" id="2_mucay"]
 [ext_resource type="FontFile" uid="uid://bftkdfx1kntsr" path="res://assets/fonts/Pixels_Bold.ttf" id="2_rxn5f"]
+[ext_resource type="Texture2D" uid="uid://bns60oqlq3rea" path="res://assets/ui/screens/main_menu/MainMenu.png" id="2_tpu4e"]
+[ext_resource type="Texture2D" uid="uid://d1ypcst7gqt5c" path="res://assets/ui/components/button/button_clicked.png" id="3_tpu4e"]
+[ext_resource type="Texture2D" uid="uid://mdbnv1y5e6ju" path="res://assets/ui/components/button/button_hovered.png" id="4_0s7nu"]
 
 [node name="MainMenu" type="Node2D"]
 script = ExtResource("1_dxmgs")
 
-[node name="Buttons" type="VBoxContainer" parent="."]
-offset_left = 1120.0
-offset_top = 53.0
-offset_right = 1881.0
-offset_bottom = 1033.0
-theme_override_constants/separation = 60
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(960, 540)
+scale = Vector2(8, 8)
+texture = ExtResource("2_tpu4e")
 
-[node name="PlayButton" type="TextureButton" parent="Buttons"]
-custom_minimum_size = Vector2(160, 200)
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+offset_left = 1068.0
+offset_top = 45.0
+offset_right = 1268.0
+offset_bottom = 293.0
+scale = Vector2(4, 4)
+theme_override_constants/separation = 16
+
+[node name="PlayButton" type="TextureButton" parent="VBoxContainer"]
+custom_minimum_size = Vector2(200, 50)
 layout_mode = 2
 mouse_default_cursor_shape = 2
+texture_normal = ExtResource("2_mucay")
+texture_pressed = ExtResource("3_tpu4e")
+texture_hover = ExtResource("4_0s7nu")
 metadata/_edit_lock_ = true
 
-[node name="RichTextLabel" type="RichTextLabel" parent="Buttons/PlayButton"]
+[node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer/PlayButton"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -27,21 +40,25 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+theme_override_constants/outline_size = 8
 theme_override_fonts/normal_font = ExtResource("2_rxn5f")
-theme_override_font_sizes/normal_font_size = 192
+theme_override_font_sizes/normal_font_size = 32
 text = "Play
 "
 horizontal_alignment = 1
 vertical_alignment = 1
 metadata/_edit_lock_ = true
 
-[node name="SettingsButton" type="TextureButton" parent="Buttons"]
-custom_minimum_size = Vector2(160, 200)
+[node name="SettingsButton" type="TextureButton" parent="VBoxContainer"]
+custom_minimum_size = Vector2(200, 50)
 layout_mode = 2
 mouse_default_cursor_shape = 2
+texture_normal = ExtResource("2_mucay")
+texture_pressed = ExtResource("3_tpu4e")
+texture_hover = ExtResource("4_0s7nu")
 metadata/_edit_lock_ = true
 
-[node name="RichTextLabel" type="RichTextLabel" parent="Buttons/SettingsButton"]
+[node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer/SettingsButton"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -49,21 +66,25 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+theme_override_constants/outline_size = 8
 theme_override_fonts/normal_font = ExtResource("2_rxn5f")
-theme_override_font_sizes/normal_font_size = 192
+theme_override_font_sizes/normal_font_size = 32
 text = "Settings
 "
 horizontal_alignment = 1
 vertical_alignment = 1
 metadata/_edit_lock_ = true
 
-[node name="HelpButton" type="TextureButton" parent="Buttons"]
-custom_minimum_size = Vector2(160, 200)
+[node name="HelpButton" type="TextureButton" parent="VBoxContainer"]
+custom_minimum_size = Vector2(200, 50)
 layout_mode = 2
 mouse_default_cursor_shape = 2
+texture_normal = ExtResource("2_mucay")
+texture_pressed = ExtResource("3_tpu4e")
+texture_hover = ExtResource("4_0s7nu")
 metadata/_edit_lock_ = true
 
-[node name="RichTextLabel" type="RichTextLabel" parent="Buttons/HelpButton"]
+[node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer/HelpButton"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -71,20 +92,24 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+theme_override_constants/outline_size = 8
 theme_override_fonts/normal_font = ExtResource("2_rxn5f")
-theme_override_font_sizes/normal_font_size = 192
+theme_override_font_sizes/normal_font_size = 32
 text = "Help"
 horizontal_alignment = 1
 vertical_alignment = 1
 metadata/_edit_lock_ = true
 
-[node name="QuitButton" type="TextureButton" parent="Buttons"]
-custom_minimum_size = Vector2(160, 200)
+[node name="QuitButton" type="TextureButton" parent="VBoxContainer"]
+custom_minimum_size = Vector2(200, 50)
 layout_mode = 2
 mouse_default_cursor_shape = 2
+texture_normal = ExtResource("2_mucay")
+texture_pressed = ExtResource("3_tpu4e")
+texture_hover = ExtResource("4_0s7nu")
 metadata/_edit_lock_ = true
 
-[node name="RichTextLabel" type="RichTextLabel" parent="Buttons/QuitButton"]
+[node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer/QuitButton"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -92,14 +117,15 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+theme_override_constants/outline_size = 8
 theme_override_fonts/normal_font = ExtResource("2_rxn5f")
-theme_override_font_sizes/normal_font_size = 192
+theme_override_font_sizes/normal_font_size = 32
 text = "Quit"
 horizontal_alignment = 1
 vertical_alignment = 1
 metadata/_edit_lock_ = true
 
-[connection signal="pressed" from="Buttons/PlayButton" to="." method="OnPlayButtonPressed"]
-[connection signal="pressed" from="Buttons/SettingsButton" to="." method="OnSettingsButtonPressed"]
-[connection signal="pressed" from="Buttons/HelpButton" to="." method="OnHelpButtonPressed"]
-[connection signal="pressed" from="Buttons/QuitButton" to="." method="OnQuitButtonPressed"]
+[connection signal="pressed" from="VBoxContainer/PlayButton" to="." method="OnPlayButtonPressed"]
+[connection signal="pressed" from="VBoxContainer/SettingsButton" to="." method="OnSettingsButtonPressed"]
+[connection signal="pressed" from="VBoxContainer/HelpButton" to="." method="OnHelpButtonPressed"]
+[connection signal="pressed" from="VBoxContainer/QuitButton" to="." method="OnQuitButtonPressed"]

@@ -33,7 +33,8 @@ folder_colors={
 "res://assets/": "pink",
 "res://assets/levels/": "orange",
 "res://assets/scripts/": "red",
-"res://assets/ui/": "blue"
+"res://assets/ui/": "blue",
+"res://assets/weapons/": "gray"
 }
 
 [rendering]

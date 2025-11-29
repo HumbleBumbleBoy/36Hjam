@@ -10,24 +10,32 @@ theme_override_constants/separation = 10
 script = ExtResource("1_vx4qo")
 
 [node name="VolumeLabel" type="RichTextLabel" parent="."]
-custom_minimum_size = Vector2(100, 30)
+custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
+mouse_filter = 2
+theme_override_constants/outline_size = 8
 theme_override_fonts/normal_font = ExtResource("2_vxcft")
 theme_override_font_sizes/normal_font_size = 32
-text = "<Bus Name>"
-autowrap_trim_flags = 0
-horizontal_alignment = 2
+text = "Quit
+"
+horizontal_alignment = 1
 vertical_alignment = 1
+metadata/_edit_lock_ = true
 
 [node name="VolumeSlider" type="HSlider" parent="."]
 custom_minimum_size = Vector2(350, 50)
 layout_mode = 2
+value = 50.0
 
 [node name="PercentageLabel" type="RichTextLabel" parent="."]
-custom_minimum_size = Vector2(100, 30)
+custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
+mouse_filter = 2
+theme_override_constants/outline_size = 8
 theme_override_fonts/normal_font = ExtResource("2_vxcft")
 theme_override_font_sizes/normal_font_size = 32
-text = "50%"
-autowrap_trim_flags = 0
+text = "Quit
+"
+horizontal_alignment = 1
 vertical_alignment = 1
+metadata/_edit_lock_ = true
