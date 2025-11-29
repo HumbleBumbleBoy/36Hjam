@@ -28,11 +28,9 @@ project/assembly_name="36Hjam"
 [file_customization]
 
 folder_colors={
-"res://Assets/": "pink",
-"res://Common/": "blue",
 "res://Config/": "yellow",
-"res://Locations/": "purple",
-"res://Utilities/": "green"
+"res://Utilities/": "green",
+"res://assets/": "pink"
 }
 
 [rendering]

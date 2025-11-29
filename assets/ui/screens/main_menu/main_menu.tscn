@@ -1,10 +1,10 @@
 [gd_scene load_steps=3 format=3 uid="uid://87v447eylvj8"]
 
-[ext_resource type="Script" uid="uid://d1owt6401twbr" path="res://Common/UI/MainMenu/MainMenu.cs" id="1_srwcp"]
-[ext_resource type="FontFile" uid="uid://bftkdfx1kntsr" path="res://Assets/Fonts/BoldPixels.ttf" id="2_q75ty"]
+[ext_resource type="Script" uid="uid://d1owt6401twbr" path="res://assets/ui/screens/main_menu/MainMenu.cs" id="1_dxmgs"]
+[ext_resource type="FontFile" uid="uid://bftkdfx1kntsr" path="res://assets/fonts/Pixels_Bold.ttf" id="2_rxn5f"]
 
 [node name="MainMenu" type="Node2D"]
-script = ExtResource("1_srwcp")
+script = ExtResource("1_dxmgs")
 
 [node name="Buttons" type="VBoxContainer" parent="."]
 offset_left = 1120.0
@@ -27,7 +27,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-theme_override_fonts/normal_font = ExtResource("2_q75ty")
+theme_override_fonts/normal_font = ExtResource("2_rxn5f")
 theme_override_font_sizes/normal_font_size = 192
 text = "Play
 "
@@ -49,7 +49,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-theme_override_fonts/normal_font = ExtResource("2_q75ty")
+theme_override_fonts/normal_font = ExtResource("2_rxn5f")
 theme_override_font_sizes/normal_font_size = 192
 text = "Settings
 "
@@ -71,7 +71,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-theme_override_fonts/normal_font = ExtResource("2_q75ty")
+theme_override_fonts/normal_font = ExtResource("2_rxn5f")
 theme_override_font_sizes/normal_font_size = 192
 text = "Help"
 horizontal_alignment = 1
@@ -92,7 +92,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-theme_override_fonts/normal_font = ExtResource("2_q75ty")
+theme_override_fonts/normal_font = ExtResource("2_rxn5f")
 theme_override_font_sizes/normal_font_size = 192
 text = "Quit"
 horizontal_alignment = 1

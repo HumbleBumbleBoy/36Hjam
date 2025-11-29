@@ -1,18 +1,18 @@
 [gd_scene load_steps=3 format=3 uid="uid://b07x6mmywq3aw"]
 
-[ext_resource type="Script" uid="uid://cid06gaxagc5r" path="res://Common/UI/MenuElements/VolumeSlider/VolumeSlider.cs" id="1_yiqrh"]
-[ext_resource type="FontFile" uid="uid://bftkdfx1kntsr" path="res://Assets/Fonts/BoldPixels.ttf" id="2_2leae"]
+[ext_resource type="Script" uid="uid://cid06gaxagc5r" path="res://assets/ui/components/volume_slider/VolumeSlider.cs" id="1_vx4qo"]
+[ext_resource type="FontFile" uid="uid://bftkdfx1kntsr" path="res://assets/fonts/Pixels_Bold.ttf" id="2_vxcft"]
 
 [node name="VolumeSlider" type="HBoxContainer"]
 offset_right = 40.0
 offset_bottom = 40.0
 theme_override_constants/separation = 10
-script = ExtResource("1_yiqrh")
+script = ExtResource("1_vx4qo")
 
 [node name="VolumeLabel" type="RichTextLabel" parent="."]
 custom_minimum_size = Vector2(100, 30)
 layout_mode = 2
-theme_override_fonts/normal_font = ExtResource("2_2leae")
+theme_override_fonts/normal_font = ExtResource("2_vxcft")
 theme_override_font_sizes/normal_font_size = 32
 text = "<Bus Name>"
 autowrap_trim_flags = 0
@@ -26,7 +26,7 @@ layout_mode = 2
 [node name="PercentageLabel" type="RichTextLabel" parent="."]
 custom_minimum_size = Vector2(100, 30)
 layout_mode = 2
-theme_override_fonts/normal_font = ExtResource("2_2leae")
+theme_override_fonts/normal_font = ExtResource("2_vxcft")
 theme_override_font_sizes/normal_font_size = 32
 text = "50%"
 autowrap_trim_flags = 0

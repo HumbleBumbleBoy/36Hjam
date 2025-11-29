@@ -1,5 +1,6 @@
 using Godot;
-using System;
+
+namespace Hjam.assets.ui.screens.settings;
 
 public partial class Settings : Control
 {

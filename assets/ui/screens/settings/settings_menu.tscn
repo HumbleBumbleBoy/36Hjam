@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=3 uid="uid://c5n7o73d7w1tk"]
 
-[ext_resource type="PackedScene" uid="uid://bwa5wcoago2e3" path="res://Common/UI/MenuElements/VolumeSliders/v_box_container.tscn" id="1_407r5"]
-[ext_resource type="Script" uid="uid://cqekxtsyqo15u" path="res://Common/UI/MenuElements/SettingsMenu/Settings.cs" id="1_qyk6w"]
-[ext_resource type="FontFile" uid="uid://bftkdfx1kntsr" path="res://Assets/Fonts/BoldPixels.ttf" id="2_mnrrk"]
+[ext_resource type="Script" uid="uid://cqekxtsyqo15u" path="res://assets/ui/screens/settings/SettingsMenu.cs" id="1_2nb1v"]
+[ext_resource type="PackedScene" uid="uid://b07x6mmywq3aw" path="res://assets/ui/components/volume_slider/volume_slider.tscn" id="2_2nb1v"]
+[ext_resource type="FontFile" uid="uid://bftkdfx1kntsr" path="res://assets/fonts/Pixels_Bold.ttf" id="3_47pus"]
 
 [node name="Settings" type="Control"]
 layout_mode = 3
@@ -11,15 +11,30 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_qyk6w")
+script = ExtResource("1_2nb1v")
 
-[node name="VolumeSliders" parent="." instance=ExtResource("1_407r5")]
+[node name="VolumeSliders" type="VBoxContainer" parent="."]
 layout_mode = 0
 offset_left = 34.0
 offset_top = 50.0
 offset_right = 604.0
 offset_bottom = 232.0
 scale = Vector2(2, 2)
+theme_override_constants/separation = 16
+
+[node name="MasterVolume" parent="VolumeSliders" instance=ExtResource("2_2nb1v")]
+layout_mode = 2
+BusName = "Master"
+
+[node name="MusicVolume" parent="VolumeSliders" instance=ExtResource("2_2nb1v")]
+layout_mode = 2
+BusName = "Music"
+BusIndex = 1
+
+[node name="SFXVolume" parent="VolumeSliders" instance=ExtResource("2_2nb1v")]
+layout_mode = 2
+BusName = "SFX"
+BusIndex = 2
 
 [node name="BackButton" type="TextureButton" parent="."]
 custom_minimum_size = Vector2(160, 200)
@@ -38,7 +53,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-theme_override_fonts/normal_font = ExtResource("2_mnrrk")
+theme_override_fonts/normal_font = ExtResource("3_47pus")
 theme_override_font_sizes/normal_font_size = 192
 text = "Back"
 horizontal_alignment = 1
@@ -62,7 +77,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-theme_override_fonts/normal_font = ExtResource("2_mnrrk")
+theme_override_fonts/normal_font = ExtResource("3_47pus")
 theme_override_font_sizes/normal_font_size = 192
 text = "Quit"
 horizontal_alignment = 1

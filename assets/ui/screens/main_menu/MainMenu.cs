@@ -1,5 +1,6 @@
 using Godot;
-using System;
+
+namespace Hjam.assets.ui.screens.main_menu;
 
 public partial class MainMenu : Node2D
 {

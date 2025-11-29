@@ -2,10 +2,12 @@ using Godot;
 using System;
 using System.Collections.Generic;
 
+namespace HJam.assets.ui.components.volume_slider;
+
 [Tool]
 public partial class VolumeSlider : HBoxContainer
 {
-    private static Dictionary<int, double> _volumePercantageByBusIndex = new Dictionary<int, double>();
+    private static Dictionary<int, double> _volumePercantageByBusIndex = new();
 
     private string _busName = "<Bus Name>";
     private RichTextLabel _volumeLabel;
