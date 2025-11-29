@@ -30,7 +30,10 @@ project/assembly_name="36Hjam"
 folder_colors={
 "res://Config/": "yellow",
 "res://Utilities/": "green",
-"res://assets/": "pink"
+"res://assets/": "pink",
+"res://assets/levels/": "orange",
+"res://assets/scripts/": "red",
+"res://assets/ui/": "blue"
 }
 
 [rendering]
