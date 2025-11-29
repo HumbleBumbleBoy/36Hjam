@@ -7,17 +7,17 @@ public partial class MainMenu : Node2D
 
     private void OnPlayButtonPressed()
     {
-        GetTree().ChangeSceneToFile("res://Locations/GameScene/game_scene.tscn");
+        // TODO
     }
 
     private void OnSettingsButtonPressed()
     {
-        // 
+        GetTree().ChangeSceneToFile("res://assets/ui/screens/settings/settings_menu.tscn");
     }
 
     private void OnHelpButtonPressed()
     {
-        //
+        // TODO
     }
 
     private void OnQuitButtonPressed()

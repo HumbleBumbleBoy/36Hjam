@@ -2,11 +2,11 @@ using Godot;
 
 namespace Hjam.assets.ui.screens.settings;
 
-public partial class Settings : Control
+public partial class SettingsMenu : Control
 {
     private void OnBackButtonPressed()
     {
-        //
+        GetTree().ChangeSceneToFile("res://assets/ui/screens/main_menu/main_menu.tscn");
     }
 
     private void OnQuitButtonPressed()

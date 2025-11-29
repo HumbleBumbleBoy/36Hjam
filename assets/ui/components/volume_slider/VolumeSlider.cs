@@ -7,16 +7,16 @@ namespace HJam.assets.ui.components.volume_slider;
 [Tool]
 public partial class VolumeSlider : HBoxContainer
 {
-    private static Dictionary<int, double> _volumePercantageByBusIndex = new();
+    private static readonly Dictionary<int, double> VolumePercentageByBusIndex = new();
 
     private string _busName = "<Bus Name>";
     private RichTextLabel _volumeLabel;
     private HSlider _volumeSlider;
-    private RichTextLabel _percantageLabel;
+    private RichTextLabel _percentageLabel;
 
     [Export] public string BusName
     {
-        get { return _busName; }
+        get => _busName;
         set { _busName = value; UpdateVolumeLabel(); }
     }
 
@@ -30,19 +30,16 @@ public partial class VolumeSlider : HBoxContainer
         _volumeSlider = GetNode<HSlider>("VolumeSlider");
         _volumeSlider.ValueChanged += _volumeSlider_ValueChanged;
 
-        _percantageLabel = GetNode<RichTextLabel>("PercantageLabel");
-        UpdatePercantageLabel();
+        _percentageLabel = GetNode<RichTextLabel>("PercentageLabel");
+        UpdatePercentageLabel();
 
-        if (_volumePercantageByBusIndex.ContainsKey(BusIndex))
-        {
-            _volumeSlider.Value = _volumePercantageByBusIndex[BusIndex];
-        } else { _volumeSlider.Value = 50.0; }
+        _volumeSlider.Value = VolumePercentageByBusIndex.GetValueOrDefault(BusIndex, 50.0);
     }
 
     private void _volumeSlider_ValueChanged(double value)
     {
-        UpdatePercantageLabel();
-        _volumePercantageByBusIndex[BusIndex] = value;
+        UpdatePercentageLabel();
+        VolumePercentageByBusIndex[BusIndex] = value;
 
         if (value == 0)
         {
@@ -54,7 +51,7 @@ public partial class VolumeSlider : HBoxContainer
             AudioServer.SetBusMute(BusIndex, false);
         }
 
-        float decibels = ConvertPercantageToDb(value);
+        var decibels = ConvertPercentageToDb(value);
         AudioServer.SetBusVolumeDb(BusIndex, decibels);
     }
 
@@ -65,17 +62,17 @@ public partial class VolumeSlider : HBoxContainer
         _volumeLabel.Text = _busName;
     }
 
-    private void UpdatePercantageLabel()
+    private void UpdatePercentageLabel()
     {
-        double volume = _volumeSlider.Value;
-        string volumePercantage = $"{Mathf.Floor(volume)}%";
-        _percantageLabel.Text = volumePercantage;
+        var volume = _volumeSlider.Value;
+        var volumePercentage = $"{Mathf.Floor(volume)}%";
+        _percentageLabel.Text = volumePercentage;
     }
 
-    private float ConvertPercantageToDb(double percantage)
+    private static float ConvertPercentageToDb(double percentage)
     {
-        float scale = 20.0f;
-        float divisor = 50.0f;
-        return scale * (float)Math.Log10(percantage / divisor);
+        const float scale = 20.0f;
+        const float divisor = 50.0f;
+        return scale * (float)Math.Log10(percentage / divisor);
     }
 }
