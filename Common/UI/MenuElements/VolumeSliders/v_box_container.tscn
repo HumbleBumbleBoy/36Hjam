@@ -1,0 +1,22 @@
+[gd_scene load_steps=2 format=3 uid="uid://bwa5wcoago2e3"]
+
+[ext_resource type="PackedScene" uid="uid://b07x6mmywq3aw" path="res://Common/UI/MenuElements/VolumeSlider/volume_slider.tscn" id="1_4wc0p"]
+
+[node name="VolumeSliders" type="VBoxContainer"]
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_constants/separation = 16
+
+[node name="MasterVolume" parent="." instance=ExtResource("1_4wc0p")]
+layout_mode = 2
+BusName = "Master"
+
+[node name="MusicVolume" parent="." instance=ExtResource("1_4wc0p")]
+layout_mode = 2
+BusName = "Music"
+BusIndex = 1
+
+[node name="SFXVolume" parent="." instance=ExtResource("1_4wc0p")]
+layout_mode = 2
+BusName = "SFX"
+BusIndex = 2
