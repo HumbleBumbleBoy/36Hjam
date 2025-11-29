@@ -1,0 +1,23 @@
+[gd_scene load_steps=2 format=3 uid="uid://b07x6mmywq3aw"]
+
+[ext_resource type="Script" uid="uid://cid06gaxagc5r" path="res://Common/UI/MenuElements/VolumeSlider.cs" id="1_yiqrh"]
+
+[node name="VolumeSlider" type="HBoxContainer"]
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_constants/separation = 10
+script = ExtResource("1_yiqrh")
+
+[node name="VolumeLabel" type="RichTextLabel" parent="."]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+text = "<Bus Name>"
+
+[node name="VolumeSlider" type="HSlider" parent="."]
+custom_minimum_size = Vector2(350, 0)
+layout_mode = 2
+
+[node name="PercentageLabel" type="RichTextLabel" parent="."]
+custom_minimum_size = Vector2(67, 0)
+layout_mode = 2
+text = "50%"
