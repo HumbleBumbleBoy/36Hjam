@@ -7,7 +7,7 @@ namespace Hjam.assets.scripts.lib.concurrency;
 public static class ConcurrencyExtensions
 {
     
-    public static async Task Await(this Node node, float seconds)
+    public static async Task Delay(this Node node, float seconds)
     {
         var timer = node.GetTree().CreateTimer(seconds);
         await node.ToSignal(timer, Timer.SignalName.Timeout);
@@ -19,14 +19,15 @@ public static class ConcurrencyExtensions
     {
         while (true)
         {
-            await node.Await(seconds);
-            
             var shouldStop = await action();
+            
+            await node.Delay(seconds);
+            
             if (shouldStop) break;
         }
     }
 
-    public static async Task RunAtMost(this Node node, float seconds, int times, Func<int, Task<bool>> action)
+    public static async Task RunAtMostEvery(this Node node, float seconds, int times, Func<int, Task<bool>> action)
     {
         var count = 0;
         await node.Every(seconds, async () =>

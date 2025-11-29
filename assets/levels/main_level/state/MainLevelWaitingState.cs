@@ -2,6 +2,7 @@
 using Godot;
 using Hjam.assets.scripts.lib.concurrency;
 using Hjam.assets.scripts.lib.state;
+using Hjam.assets.ui.components.overlay_text;
 
 namespace Hjam.assets.levels.main_level.state;
 
@@ -9,10 +10,22 @@ public class MainLevelWaitingState : State<Node>
 {
     public override async Task OnEnter(Node context, State<Node>? previousState)
     {
-        await context.RunAtMost(seconds: 1, times: 5, current =>
+        // TODO : Spawn Player
+
+        OverlayText.CreateInstance(context, "Get Ready!", reusable: true);
+        await context.Delay(seconds: 2);
+        
+        await context.RunAtMostEvery(seconds: 1, times: 5, current =>
         {
-            GD.Print($"Waiting... {current}");
+            OverlayText.CreateInstance(context, (5 - current).ToString(), reusable: true);
             return Task.FromResult(false);
         });
+        
+        OverlayText.CreateInstance(context, "Fight!", reusable: true);
+        await context.Delay(seconds: 1);
+        
+        OverlayText.DeleteInstance(context);
+        
+        ChangeState(new MainLevelPlayingState());
     }
 }
