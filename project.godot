@@ -12,8 +12,23 @@ config_version=5
 
 config/name="36Hjam"
 config/features=PackedStringArray("4.5", "Forward Plus")
-config/icon="res://icon.svg"
+
+[display]
+
+window/size/viewport_width=1920
+window/size/viewport_height=1080
+window/size/mode=3
+window/stretch/mode="viewport"
 
 [dotnet]
 
 project/assembly_name="36Hjam"
+
+[file_customization]
+
+folder_colors={
+"res://Assets/": "pink",
+"res://Common/": "blue",
+"res://Config/": "yellow",
+"res://Utilities/": "green"
+}
