@@ -1,0 +1,63 @@
+[gd_scene load_steps=13 format=3 uid="uid://co5tdlskx4qhv"]
+
+[ext_resource type="Script" uid="uid://mgam83vy2kcy" path="res://assets/entities/player/Player.cs" id="1_u4l4u"]
+[ext_resource type="Texture2D" uid="uid://dm5f5rwkkbemj" path="res://assets/entities/player/sprites/idle/LittleGuy_Idle1.png" id="1_w057r"]
+[ext_resource type="Texture2D" uid="uid://74rk3q6cug3i" path="res://assets/entities/player/sprites/idle/LittleGuy_Idle2.png" id="2_1nh4p"]
+[ext_resource type="Texture2D" uid="uid://cms5de6q8q4ii" path="res://assets/entities/player/sprites/idle/LittleGuy_Idle3.png" id="3_qo4ht"]
+[ext_resource type="Texture2D" uid="uid://j4rbgwmei8ii" path="res://assets/entities/player/sprites/run/LittleGuy_Run1.png" id="4_8eu5x"]
+[ext_resource type="Texture2D" uid="uid://cclo4k1c0mtxt" path="res://assets/entities/player/sprites/run/LittleGuy_Run2.png" id="5_u4l4u"]
+[ext_resource type="Texture2D" uid="uid://b1x7pk48lqqiu" path="res://assets/entities/player/sprites/run/LittleGuy_Run3.png" id="6_ffla8"]
+[ext_resource type="Texture2D" uid="uid://gv35guvwqltb" path="res://assets/entities/player/sprites/run/LittleGuy_Run4.png" id="7_nji2o"]
+[ext_resource type="Texture2D" uid="uid://cj7gdklk8hmdm" path="res://assets/entities/player/sprites/run/LittleGuy_Run5.png" id="8_lkcuu"]
+[ext_resource type="Texture2D" uid="uid://b18wd6pghik6h" path="res://assets/entities/player/sprites/run/LittleGuy_Run6.png" id="9_7p45q"]
+[ext_resource type="Texture2D" uid="uid://c1jooybpacl0p" path="res://assets/entities/player/sprites/run/LittleGuy_Run7.png" id="10_cljug"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_46spj"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_w057r")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_1nh4p")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_qo4ht")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_8eu5x")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_u4l4u")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_ffla8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_nji2o")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_lkcuu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_7p45q")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_cljug")
+}],
+"loop": true,
+"name": &"run",
+"speed": 18.0
+}]
+
+[node name="Player" type="Node2D"]
+script = ExtResource("1_u4l4u")
+
+[node name="PlayerSprite" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_46spj")
+animation = &"run"

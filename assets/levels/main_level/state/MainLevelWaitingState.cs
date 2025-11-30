@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using Godot;
+using Hjam.assets.entities.player;
 using Hjam.assets.scripts.lib.concurrency;
 using Hjam.assets.scripts.lib.state;
 using Hjam.assets.ui.components.overlay_text;
@@ -10,7 +11,11 @@ public class MainLevelWaitingState : State<Node>
 {
     public override async Task OnEnter(Node context, State<Node>? previousState)
     {
-        // TODO : Spawn Player
+        var playerScene = GD.Load<PackedScene>("res://assets/entities/player/player_scene.tscn");
+        var player = playerScene.Instantiate<Player>();
+        context.AddChild(player);
+        
+        // TODO : Select Spawn Point
 
         OverlayText.CreateInstance(context, "Get Ready!", reusable: true);
         await context.Delay(seconds: 2);
