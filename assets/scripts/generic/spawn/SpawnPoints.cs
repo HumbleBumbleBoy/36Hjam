@@ -11,14 +11,12 @@ public partial class SpawnPoints : Node
     
     private readonly Random _random = new();
     
-    public void IfEmptyGenerateSpawnPoints((int x, int y, int width, int height) area, int numberOfPoints, float minDistanceBetweenPoints = 0f)
+    public void GenerateSpawnPoints((int x, int y, int width, int height) area, int numberOfPoints, float minDistanceBetweenPoints = 0f)
     {
-        if (GetChildCount() > 0)
-        {
-            return;
-        }
-
         var points = new List<Vector2>();
+        var existingPoints = GetChildren().Where(child => child is Node2D).Cast<Node2D>().Select(node => node.Position).ToList();
+        points.AddRange(existingPoints);
+        
         var attempts = 0;
         var maxAttempts = numberOfPoints * 10;
         while (points.Count < numberOfPoints && attempts < maxAttempts)
@@ -32,15 +30,22 @@ public partial class SpawnPoints : Node
             {
                 points.Add(randomPoint);
                 
-                var spawnPoint = new SpawnPoint
-                {
-                    Position = randomPoint
-                };
-                AddChild(spawnPoint);
+                CreateSpawnPoint(randomPoint);
             }
             
             attempts++;
         }
+    }
+    
+    public SpawnPoint CreateSpawnPoint(Vector2 position)
+    {
+        var spawnPoint = new SpawnPoint
+        {
+            Position = position
+        };
+        AddChild(spawnPoint);
+        
+        return spawnPoint;
     }
     
     public Node2D? GetRandomSpawnPoint()
