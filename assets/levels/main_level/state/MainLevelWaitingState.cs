@@ -18,8 +18,8 @@ public class MainLevelWaitingState : State<Node>
         
         if (context.GetTree().GetFirstNodeInGroup("spawn_points") is SpawnPoints spawnPoints)
         {
-            var spawnPoint = spawnPoints.GetRandomSpawnPoint();
-            player.GlobalPosition = spawnPoint.GlobalPosition;
+            var spawnPoint = spawnPoints.GetRandomSpawnPosition();
+            player.GlobalPosition = spawnPoint;
         }
 
         OverlayText.CreateInstance(context, "Get Ready!", reusable: true);
