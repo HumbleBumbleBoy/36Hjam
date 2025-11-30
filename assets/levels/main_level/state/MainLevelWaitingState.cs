@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Godot;
 using Hjam.assets.entities.player;
+using Hjam.assets.scripts.generic;
 using Hjam.assets.scripts.lib.concurrency;
 using Hjam.assets.scripts.lib.state;
 using Hjam.assets.ui.components.overlay_text;
@@ -15,7 +16,11 @@ public class MainLevelWaitingState : State<Node>
         var player = playerScene.Instantiate<Player>();
         context.AddChild(player);
         
-        // TODO : Select Spawn Point
+        if (context.GetTree().GetFirstNodeInGroup("spawn_points") is SpawnPoints spawnPoints)
+        {
+            var spawnPoint = spawnPoints.GetRandomSpawnPoint();
+            player.GlobalPosition = spawnPoint.GlobalPosition;
+        }
 
         OverlayText.CreateInstance(context, "Get Ready!", reusable: true);
         await context.Delay(seconds: 2);
