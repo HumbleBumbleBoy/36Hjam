@@ -59,5 +59,6 @@ animations = [{
 script = ExtResource("1_u4l4u")
 
 [node name="PlayerSprite" type="AnimatedSprite2D" parent="."]
+position = Vector2(1, -31)
 sprite_frames = SubResource("SpriteFrames_46spj")
 animation = &"run"

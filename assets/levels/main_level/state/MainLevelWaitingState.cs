@@ -18,6 +18,12 @@ public class MainLevelWaitingState : State<Node>
         
         if (context.GetTree().GetFirstNodeInGroup("spawn_points") is SpawnPoints spawnPoints)
         {
+            spawnPoints.IfEmptyGenerateSpawnPoints(
+                (x: 0, y: 0, width: 1920, height: 1080),
+                numberOfPoints: 36,
+                minDistanceBetweenPoints: 100f
+            );
+            
             var spawnPoint = spawnPoints.GetRandomSpawnPosition();
             player.GlobalPosition = spawnPoint;
         }
