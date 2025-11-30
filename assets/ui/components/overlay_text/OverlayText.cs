@@ -14,6 +14,8 @@ public partial class OverlayText : Control
             ? parent.GetNodeOrNull<OverlayText>("OverlayText") ?? overlayTextScene.Instantiate<OverlayText>()
             : overlayTextScene.Instantiate<OverlayText>();
 
+        overlayText.ZIndex = 4096;
+        
         if (reusable)
         {
             overlayText.Name = "OverlayText";
