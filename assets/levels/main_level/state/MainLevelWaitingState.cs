@@ -13,6 +13,17 @@ namespace Hjam.assets.levels.main_level.state;
 
 public class MainLevelWaitingState(int stage) : State<Node2D>
 {
+    
+    private readonly (int x, int y, int width, int height) _worldBounds = (x: 0, y: 0, width: 1920, height: 1080);
+    private readonly (int x, int y) _worldPadding = (x: 10, y: 10);
+    
+    private (int x, int y, int width, int height) WorldBounds =>
+        (x: _worldBounds.x + _worldPadding.x, 
+            y: _worldBounds.y + _worldPadding.y,
+            width: _worldBounds.width - _worldPadding.x * 2,
+            height: _worldBounds.height - _worldPadding.y * 2);
+    private Rect2 WorldRect => new(WorldBounds.x, WorldBounds.y, WorldBounds.width, WorldBounds.height);
+    
     public override async Task OnEnter(Node2D context, State<Node2D>? previousState)
     {
         var playerScene = GD.Load<PackedScene>("res://assets/entities/player/player_scene.tscn");
@@ -27,12 +38,14 @@ public class MainLevelWaitingState(int stage) : State<Node2D>
             return;
         }
         
+        GenerateWorldWalls(context);
+        
         GenerateLevel(context, spawnPoints);
 
         _ = ShowLevelPlacement(context, 4);
         
         spawnPoints.GenerateSpawnPoints(
-            (x: 0, y: 0, width: 1920, height: 1080),
+            WorldBounds,
             numberOfPoints: 120,
             minDistanceBetweenPoints: 100f
         );
@@ -62,8 +75,6 @@ public class MainLevelWaitingState(int stage) : State<Node2D>
     {
         var random = new Random();
         
-        var worldSize = (x: 0, y: 0, width: 1920, height: 1080);
-        
         var blockCount = 10;
 
         const float scaleFactor    = 1.5f;
@@ -82,8 +93,8 @@ public class MainLevelWaitingState(int stage) : State<Node2D>
             tries++;
             
             var randomPosition = new Vector2(
-                (float)(random.NextDouble() * worldSize.width) + worldSize.x,
-                (float)(random.NextDouble() * worldSize.height) + worldSize.y
+                (float)(random.NextDouble() * WorldBounds.width) + WorldBounds.x,
+                (float)(random.NextDouble() * WorldBounds.height) + WorldBounds.y
             );
             
             Vector2? closestPosition = blockPositions.Count == 0 ? null : blockPositions
@@ -130,7 +141,7 @@ public class MainLevelWaitingState(int stage) : State<Node2D>
                 randomPosition - randomSize / 2,
                 randomSize
             );
-            if (!new Rect2(worldSize.x, worldSize.y, worldSize.width, worldSize.height).Encloses(blockRect))
+            if (!WorldRect.Encloses(blockRect))
             {
                 continue;
             }
@@ -196,5 +207,61 @@ public class MainLevelWaitingState(int stage) : State<Node2D>
             obstacle.Show();
             await context.Delay(delay);
         }
+    }
+    
+    private void GenerateWorldWalls(Node2D context)
+    {
+        const float wallThickness = 50f;
+
+        var walls = new List<StaticBody2D>();
+
+        // Top wall
+        walls.Add(CreateWall(
+            position: new Vector2(WorldBounds.x + WorldBounds.width / 2f, WorldBounds.y - wallThickness / 2),
+            size: new Vector2(WorldBounds.width, wallThickness)
+        ));
+        
+        // Bottom wall
+        walls.Add(CreateWall(
+            position: new Vector2(WorldBounds.x + WorldBounds.width / 2f, WorldBounds.y + WorldBounds.height + wallThickness / 2),
+            size: new Vector2(WorldBounds.width, wallThickness)
+        ));
+        
+        // Left wall
+        walls.Add(CreateWall(
+            position: new Vector2(WorldBounds.x - wallThickness / 2, WorldBounds.y + WorldBounds.height / 2f),
+            size: new Vector2(wallThickness, WorldBounds.height)
+        ));
+        
+        // Right wall
+        walls.Add(CreateWall(
+            position: new Vector2(WorldBounds.x + WorldBounds.width + wallThickness / 2, WorldBounds.y + WorldBounds.height / 2f),
+            size: new Vector2(wallThickness, WorldBounds.height)
+        ));
+
+        foreach (var wall in walls)
+        {
+            context.AddChild(wall);
+        }
+    }
+    
+    private static StaticBody2D CreateWall(Vector2 position, Vector2 size)
+    {
+        var wall = new StaticBody2D
+        {
+            Position = position
+        };
+
+        var collisionShape = new CollisionShape2D
+        {
+            Shape = new RectangleShape2D
+            {
+                Size = size
+            }
+        };
+        
+        wall.AddChild(collisionShape);
+        
+        return wall;
     }
 }
