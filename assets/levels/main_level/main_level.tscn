@@ -1,9 +1,13 @@
-[gd_scene load_steps=2 format=3 uid="uid://btdv41rfuyiib"]
+[gd_scene load_steps=3 format=3 uid="uid://btdv41rfuyiib"]
 
 [ext_resource type="Script" uid="uid://bfxqp18ucgqsg" path="res://assets/levels/main_level/MainLevel.cs" id="1_gxa12"]
+[ext_resource type="Script" uid="uid://blqlktx4ico3y" path="res://assets/scripts/generic/spawn/SpawnPoints.cs" id="2_cc8nh"]
 
 [node name="MainLevel" type="Node2D"]
 script = ExtResource("1_gxa12")
+
+[node name="spawn_points" type="Node" parent="." groups=["spawn_points"]]
+script = ExtResource("2_cc8nh")
 
 [node name="Background" type="ColorRect" parent="."]
 anchors_preset = 15

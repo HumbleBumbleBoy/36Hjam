@@ -16,4 +16,14 @@ public partial class MainLevel : Node2D
         
         StateMachine.ChangeState(new MainLevelWaitingState());
     }
+
+    public override void _Process(double delta)
+    {
+        StateMachine.Update(delta);
+    }
+    
+    public override void _PhysicsProcess(double delta)
+    {
+        StateMachine.FixedUpdate(delta);
+    }
 }

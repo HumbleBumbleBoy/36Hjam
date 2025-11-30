@@ -1,5 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Godot;
+using Hjam.assets.entities.player;
+using Hjam.assets.scripts.generic;
 using Hjam.assets.scripts.lib.concurrency;
 using Hjam.assets.scripts.lib.state;
 using Hjam.assets.ui.components.overlay_text;
@@ -10,7 +12,23 @@ public class MainLevelWaitingState : State<Node>
 {
     public override async Task OnEnter(Node context, State<Node>? previousState)
     {
-        // TODO : Spawn Player
+        var playerScene = GD.Load<PackedScene>("res://assets/entities/player/player_scene.tscn");
+        var player = playerScene.Instantiate<Player>();
+        context.AddChild(player);
+        
+        player.StateMachine.Enabled = false;
+        
+        if (context.GetTree().GetFirstNodeInGroup("spawn_points") is SpawnPoints spawnPoints)
+        {
+            spawnPoints.IfEmptyGenerateSpawnPoints(
+                (x: 0, y: 0, width: 1920, height: 1080),
+                numberOfPoints: 36,
+                minDistanceBetweenPoints: 100f
+            );
+            
+            var spawnPoint = spawnPoints.GetRandomSpawnPosition();
+            player.GlobalPosition = spawnPoint;
+        }
 
         OverlayText.CreateInstance(context, "Get Ready!", reusable: true);
         await context.Delay(seconds: 2);
@@ -26,6 +44,7 @@ public class MainLevelWaitingState : State<Node>
         
         OverlayText.DeleteInstance(context);
         
+        player.StateMachine.Enabled = true;
         ChangeState(new MainLevelPlayingState());
     }
 }

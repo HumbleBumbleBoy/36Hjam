@@ -6,7 +6,4 @@
     <RootNamespace>Hjam</RootNamespace>
     <Nullable>enable</Nullable>
   </PropertyGroup>
-  <ItemGroup>
-    <Folder Include="assets\scripts\" />
-  </ItemGroup>
 </Project>
