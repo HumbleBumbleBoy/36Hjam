@@ -13,4 +13,14 @@ public class PlayerIdleState : State<Player>
         
         return Task.CompletedTask;
     }
+
+    public override Task OnSignal(Player context, string signalName, params object?[] args)
+    {
+        if (signalName == "move")
+        {
+            ChangeState(new PlayerRunState());
+        }
+        
+        return Task.CompletedTask;
+    }
 }

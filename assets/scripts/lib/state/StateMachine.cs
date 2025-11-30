@@ -6,6 +6,8 @@ public partial class StateMachine<TValue>(TValue context) : Node
 {
     public State<TValue>? CurrentState { get; private set; }
     public TValue GetContext() => context;
+
+    public bool Enabled = true;
     
     private State<TValue>? _pendingState;
 
@@ -41,12 +43,32 @@ public partial class StateMachine<TValue>(TValue context) : Node
 
     public void Update(double delta)
     {
+        if (!Enabled)
+        {
+            return;
+        }
+        
         CurrentState?.OnUpdate(GetContext(), delta);
     }
     
     public void FixedUpdate(double delta)
     {
+        if (!Enabled)
+        {
+            return;
+        }
+        
         CurrentState?.OnFixedUpdate(GetContext(), delta);
+    }
+    
+    public void EmitSignal(string signalName, params object?[] args)
+    {
+        if (!Enabled)
+        {
+            return;
+        }
+        
+        CurrentState?.OnSignal(GetContext(), signalName, args);
     }
 
     private void _HandleStateChangeRequest(State<TValue>? newState)

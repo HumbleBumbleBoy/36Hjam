@@ -16,6 +16,8 @@ public class MainLevelWaitingState : State<Node>
         var player = playerScene.Instantiate<Player>();
         context.AddChild(player);
         
+        player.StateMachine.Enabled = false;
+        
         if (context.GetTree().GetFirstNodeInGroup("spawn_points") is SpawnPoints spawnPoints)
         {
             spawnPoints.IfEmptyGenerateSpawnPoints(
@@ -42,6 +44,7 @@ public class MainLevelWaitingState : State<Node>
         
         OverlayText.DeleteInstance(context);
         
+        player.StateMachine.Enabled = true;
         ChangeState(new MainLevelPlayingState());
     }
 }

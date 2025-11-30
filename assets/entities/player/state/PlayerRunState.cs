@@ -13,4 +13,24 @@ public class PlayerRunState : State<Player>
         
         return Task.CompletedTask;
     }
+
+    public override Task OnSignal(Player context, string signalName, params object?[] args)
+    {
+        switch (signalName)
+        {
+            case "stop_moving":
+                ChangeState(new PlayerIdleState());
+                break;
+            case "move":
+            {
+                var movementVector = (Vector2) args[0]!;
+                var speed = (int) args[1]!;
+                context.Velocity = movementVector * speed;
+                context.MoveAndSlide();
+                break;
+            }
+        }
+
+        return Task.CompletedTask;
+    }
 }

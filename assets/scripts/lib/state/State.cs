@@ -18,4 +18,6 @@ public abstract class State<TValue>
     public virtual Task OnUpdate(TValue context, double deltaTime) => Task.CompletedTask;
     public virtual Task OnFixedUpdate(TValue context, double deltaTime) => Task.CompletedTask;
     
+    public virtual Task OnSignal(TValue context, string signalName, params object?[] args) => Task.CompletedTask;
+    
 }
