@@ -38,9 +38,16 @@ public class MainLevelWaitingState(int stage) : State<Node2D>
             return;
         }
         
-        GenerateWorldWalls(context);
-        
         GenerateLevel(context, spawnPoints);
+        
+        var navigationPolygon = GenerateNavigationMesh(context);
+        var navigationRegion = context.GetTree().GetFirstNodeInGroup("navigation_region");
+        if (navigationRegion is NavigationRegion2D navRegion)
+        {
+            navRegion.NavigationPolygon = navigationPolygon;
+        }
+        
+        GenerateWorldWalls(context);
 
         _ = ShowLevelPlacement(context, 4);
         
@@ -68,14 +75,37 @@ public class MainLevelWaitingState(int stage) : State<Node2D>
         OverlayText.DeleteInstance(context);
         
         player.StateMachine.Enabled = true;
+        
         ChangeState(new MainLevelPlayingState(stage));
     }
-    
+
+    private NavigationPolygon GenerateNavigationMesh(Node2D context)
+    {
+        var navigationPolygon = new NavigationPolygon();
+        
+        var allVertices = new Vector2[]
+        {
+            new(WorldBounds.x, WorldBounds.y),
+            new(WorldBounds.x + WorldBounds.width, WorldBounds.y),
+            new(WorldBounds.x + WorldBounds.width, WorldBounds.y + WorldBounds.height),
+            new(WorldBounds.x, WorldBounds.y + WorldBounds.height)
+        };
+
+        navigationPolygon.AddOutline(allVertices);
+        
+        var geometryData = new NavigationMeshSourceGeometryData2D();
+        
+        NavigationServer2D.ParseSourceGeometryData(navigationPolygon, geometryData, context);
+        NavigationServer2D.BakeFromSourceGeometryData(navigationPolygon, geometryData);
+        
+        return navigationPolygon;
+    }
+
     private void GenerateLevel(Node2D context, SpawnPoints spawnPointContainer)
     {
         var random = new Random();
         
-        var blockCount = 10;
+        var blockCount = 6;
 
         const float scaleFactor    = 1.5f;
         const float maxBlockWidth  = 200f * scaleFactor;
@@ -135,6 +165,7 @@ public class MainLevelWaitingState(int stage) : State<Node2D>
             
             block.AddChild(colorRect);
             block.AddChild(collisionShape);
+            block.AddToGroup("level_obstacles");
             
             // check the collision shape is fully within the world bounds
             var blockRect = new Rect2(

@@ -58,6 +58,20 @@ public partial class SpawnPoints : Node
         return spawnPoints[randomIndex] as Node2D ?? null!;
     }
     
+    public Node2D? GetFarRandomSpawnPoint(List<Vector2> centers, float minDistance)
+    {
+        var spawnPoints = GetChildren().Where(child => child is Node2D { Visible: true }).Cast<Node2D>().ToList();
+        var validSpawnPoints = spawnPoints.Where(sp =>
+            centers.All(center => sp.GlobalPosition.DistanceTo(center) >= minDistance)
+        ).ToList();
+        
+        if (validSpawnPoints.Count == 0)
+            return null;
+        
+        var randomIndex = _random.Next(0, validSpawnPoints.Count);
+        return validSpawnPoints[randomIndex];
+    }
+    
     public Vector2 GetRandomSpawnPosition()
     {
         var spawnPoint = GetRandomSpawnPoint();

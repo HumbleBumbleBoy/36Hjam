@@ -10,9 +10,11 @@ public partial class StateMachine<TValue>(TValue context) : Node
     public bool Enabled = true;
     
     private State<TValue>? _pendingState;
+    private bool _transitioning;
 
     public void ChangeState(State<TValue>? newState)
     {
+        _transitioning = true;
         while (true)
         {
             if (CurrentState is not null)
@@ -39,6 +41,8 @@ public partial class StateMachine<TValue>(TValue context) : Node
             CurrentState.OnEnter(GetContext(), previousState);
             break;
         }
+        
+        _transitioning = false;
     }
 
     public void Update(double delta)
@@ -73,7 +77,7 @@ public partial class StateMachine<TValue>(TValue context) : Node
 
     private void _HandleStateChangeRequest(State<TValue>? newState)
     {
-        if (_pendingState is null && CurrentState is not null)
+        if (_transitioning)
         {
             _pendingState = newState;
             return;
