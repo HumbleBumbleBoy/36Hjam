@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://dcw647p2qjh1x"]
+[gd_scene load_steps=10 format=3 uid="uid://dcw647p2qjh1x"]
 
 [ext_resource type="Script" uid="uid://chwfhj7yao446" path="res://assets/entities/shooting_enemy/ShootingEnemy.cs" id="1_1nri3"]
 [ext_resource type="Texture2D" uid="uid://5cbjifux42e1" path="res://assets/entities/generic_enemy/generic_enemy_idle/GenericEnemy_Idle1.png" id="2_ffv1l"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://jb8at5aafomm" path="res://assets/entities/generic_enemy/generic_enemy_run/GenericEnemy_Run1.png" id="4_u4owp"]
 [ext_resource type="Texture2D" uid="uid://7tt8wwt71gr1" path="res://assets/entities/generic_enemy/generic_enemy_run/GenericEnemy_Run2.png" id="5_5i7lf"]
 [ext_resource type="Texture2D" uid="uid://1uf40c7yiyta" path="res://assets/entities/generic_enemy/generic_enemy_run/GenericEnemy_Run3.png" id="6_t0yhd"]
+[ext_resource type="Texture2D" uid="uid://55x6vmlx1a8r" path="res://assets/weapons/pistol/pistol.png" id="7_5i7lf"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_1nri3"]
 animations = [{
@@ -52,3 +53,13 @@ position = Vector2(0, -1.5)
 shape = SubResource("RectangleShape2D_1nri3")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+
+[node name="Pivot" type="Node2D" parent="."]
+
+[node name="Pistol" type="Sprite2D" parent="Pivot"]
+position = Vector2(25.333334, 0)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("7_5i7lf")
+
+[node name="Muzzle" type="Node2D" parent="Pivot"]
+position = Vector2(41.333332, -6.666667)

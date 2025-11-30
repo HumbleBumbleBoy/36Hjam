@@ -7,19 +7,33 @@ public partial class Enemy : CharacterBody2D
 {
     [Export] public float Speed = 100f;
     [Export] public float MinimumDistanceToPlayer = 150f;
-    [Export] public float MinimumDistanceToOthers = 120f;
+    [Export] public float MinimumDistanceToOthers = 40f;
+    [Export] public float MaxHealth = 100f;
     
     private NavigationAgent2D _agent = null!;
     private Player _player = null!;
     
     private bool _isMoving = false;
+    
+    private float _currentHealth ;
 
     public override void _Ready()
     {
+        _currentHealth = MaxHealth;
         _agent = GetNode<NavigationAgent2D>("NavigationAgent2D");
         _player = (GetTree().GetFirstNodeInGroup("player") as Player)!;
     }
+    
+    public bool IsDead()
+    {
+        return _currentHealth <= 0;
+    }
 
+    public void TakeDamage(float amount)
+    {
+        _currentHealth -= amount;
+    }
+    
     public override void _Process(double delta)
     {
         if (Velocity.Length() <= 0.02 && _isMoving)
@@ -31,6 +45,11 @@ public partial class Enemy : CharacterBody2D
         {
             _isMoving = true;
             OnMove();
+        }
+
+        if (IsDead())
+        {
+            QueueFree();
         }
     }
 

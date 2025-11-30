@@ -17,7 +17,7 @@ public class MainLevelPlayingState(int stage) : State<Node2D>
     private readonly List<PackedScene> _enemyScenes =
     [
         GD.Load<PackedScene>("res://assets/entities/pistol_guy/PistolGuy.tscn"),
-        GD.Load<PackedScene>("res://assets/entities/knife_guy/KnifeGuy.tscn")
+        //GD.Load<PackedScene>("res://assets/entities/knife_guy/KnifeGuy.tscn")
     ];
     
     private float _timeSinceLastSpawn = 0f;
