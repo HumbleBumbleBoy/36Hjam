@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://co5tdlskx4qhv"]
+[gd_scene load_steps=16 format=3 uid="uid://co5tdlskx4qhv"]
 
 [ext_resource type="Script" uid="uid://mgam83vy2kcy" path="res://assets/entities/player/Player.cs" id="1_u4l4u"]
 [ext_resource type="Texture2D" uid="uid://dm5f5rwkkbemj" path="res://assets/entities/player/sprites/idle/LittleGuy_Idle1.png" id="1_w057r"]
@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://cj7gdklk8hmdm" path="res://assets/entities/player/sprites/run/LittleGuy_Run5.png" id="8_lkcuu"]
 [ext_resource type="Texture2D" uid="uid://b18wd6pghik6h" path="res://assets/entities/player/sprites/run/LittleGuy_Run6.png" id="9_7p45q"]
 [ext_resource type="Texture2D" uid="uid://c1jooybpacl0p" path="res://assets/entities/player/sprites/run/LittleGuy_Run7.png" id="10_cljug"]
+[ext_resource type="Texture2D" uid="uid://55x6vmlx1a8r" path="res://assets/weapons/pistol/pistol.png" id="12_ffla8"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_46spj"]
 animations = [{
@@ -86,3 +87,16 @@ shape = SubResource("RectangleShape2D_u4l4u")
 visible = false
 position = Vector2(1, 2)
 shape = SubResource("RectangleShape2D_ffla8")
+
+[node name="weapons" type="Node2D" parent="."]
+
+[node name="Pistol" type="Node2D" parent="weapons"]
+visible = false
+
+[node name="Sprite" type="Sprite2D" parent="weapons/Pistol"]
+position = Vector2(25.333334, 0)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("12_ffla8")
+
+[node name="Muzzle" type="Node2D" parent="weapons/Pistol"]
+position = Vector2(41.333332, -6.666667)
